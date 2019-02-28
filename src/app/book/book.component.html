@@ -1,0 +1,37 @@
+<a [routerLink]="['/']">Về trang chủ </a>
+<div>
+  <h3 class="text-center">Danh sách đọc</h3>
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Edit</th>
+      <th>Read</th>
+    </tr>
+    </thead>
+
+    <tr *ngFor="let book of bookList; index as i" [hidden]="book.read">
+      <td>{{book.id}}</td>
+      <td>{{book.name}}</td>
+      <td><a [routerLink]="['/book',book.id,'edit']">Edit</a></td>
+      <td><button (click)="read(i)">Đã đọc</button></td>
+    </tr>
+  </table>
+</div>
+
+<form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>
+      Name:
+      <input type="text" formControlName="name">
+      <button type="submit">Thêm </button>
+    </label>
+  </div>
+  <div *ngIf="bookForm.get('name').invalid && bookForm.get('name').touched" style="color: red">
+    Tên không được dưới 6 ký
+  </div>
+
+</form>
+
+<a [routerLink]="['/book/read']">Danh sách đã đọc</a>

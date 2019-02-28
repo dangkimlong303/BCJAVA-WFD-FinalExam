@@ -1,0 +1,12 @@
+<form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>
+      Tên:
+      <input type="text" formControlName="name">
+    </label>
+  </div>
+  <div *ngIf="bookForm.get('name').invalid && bookForm.get('name').touched" style="color: red">
+    Tên không được dưới 6 ký
+  </div>
+  <button type="submit">Sửa</button>
+</form>
